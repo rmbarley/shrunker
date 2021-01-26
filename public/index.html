@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>puny.li - Shortening URLS since today</title>
+    <link rel="stylesheet" href="https://jenil.github.io/bulmaswatch/lux/bulmaswatch.min.css">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="#">
+                puny.li
+            </a>
+        </div>
+    </nav>
+    <section class="hero is-medium is-primary is-bold">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    puny.li
+                </h1>
+                <h2 class="subtitle">
+                    Shortening URLS since today
+                </h2>
+            </div>
+        </div>
+    </section>
+    <main id="app">
+        <form v-if="!success" @submit.prevent="createPuny()">
+            <div v-if="error" class="notification is-danger">
+                {{this.error}}
+            </div>
+            <div class="field is-horizontal">
+                <div class="field-label is-large">
+                    <label class="label">URL</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <p class="control">
+                            <input v-model="url" class="input is-large" type="text" placeholder="http://example.com"
+                                required>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="field is-horizontal">
+                <div class="field-label is-large">
+                    <label class="label">Name</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <p class="control is-large">
+                            <input v-model="name" class="input is-large" type="text"
+                                placeholder="something-wicked-catchy" required>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="puny-button">
+                <button type="submit" class="button is-large is-success">Shrink</button>
+            </div>
+        </form>
+        <h2 v-if="success" class="title is-1" style="text-align: center;"><a :href="'https://lmgtfy.app/?q=' + name"
+                target="_blank">https://puny.li/{{name}}</a></h2>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
